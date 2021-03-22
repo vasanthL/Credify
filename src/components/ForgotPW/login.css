@@ -1,0 +1,64 @@
+#authform > label{
+  font-size:18px;
+}
+#authform > *{
+  font-size:18px;
+}
+.tinput {
+  width:350px !important;
+  height:20px !important;
+  outline: none;
+  padding: 20px 18px !important;
+  border: 1px solid #DDDDDD;
+  border-radius:5px;
+  margin-bottom: 10px;
+}
+ 
+.tinput:focus {
+  box-shadow: 0 0 5px #1983FF;
+  border: 1px solid #1983FF
+}
+
+.card {
+  background: #fff;
+  border-radius: 10px;
+  display: inline-block;
+  height:auto;
+  margin: 1rem;
+  position: relative;
+  width: 500px;
+  
+}
+
+.card-3 {
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.card > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.card > h2 {
+  margin-top:40px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+
+.auth-container{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:100vh;  
+    width: 100%;
+    margin:0;
+    padding:0;
+}

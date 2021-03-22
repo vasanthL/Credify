@@ -1,0 +1,13 @@
+.uc-title{
+  font-size: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+} 
+.popup-btn{
+  font-size: 18px;
+  position: absolute;
+  top: 20px;
+  right: 40px;
+}

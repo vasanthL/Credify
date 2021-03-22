@@ -1,0 +1,41 @@
+.correct-answer{
+  background-color:green !important;
+  color:white !important;
+}
+.wrong-answer{
+  background-color:red !important;
+  color:white !important;
+}
+
+.result-card{
+  width:85vw;
+  height:500px;
+  display: flex;
+  flex-direction: row;
+}
+
+.doughnut-card{
+  width:100%;
+}
+
+
+.result-card > .result-content{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  width: 90%;
+}
+
+.result-card > .result-content > h1{
+  font-size: 2em;
+  /* margin-top: 100px; */
+}
+.result-card > .result-content > h2{
+  font-size: 1.7em;
+  margin-top: 50px;
+}
+
+.result-card > .result-content > *{
+  text-align: left;
+  
+}

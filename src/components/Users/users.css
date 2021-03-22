@@ -1,0 +1,202 @@
+.ucontainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap:wrap;
+  margin-left: 25px;
+}
+.ucard{
+  width: 330px !important;
+  margin: 0 20px;
+  background: linear-gradient(180deg,#63a1ff 0%,#fff 65%);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  border-radius: 40px;
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  width: auto;
+  
+}
+
+.card__body{
+  background: #fff;
+  border-radius: 38px;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card__img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 15px;
+}
+.card__img img{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  /* transition: .5s; */
+}
+.card__name{
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  color: #000;
+  display: block;
+  margin-bottom: 5px;
+}
+.card__email,.card__empid{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  color: #919191;
+  display: block;
+  margin-bottom: 5px;
+}
+.card__soc{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.card__soc--link{
+  color: #bababa;
+  margin: 0 5px;
+  font-size: 24px;
+  /* transition: .5s; */
+}
+.card__skills{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.card__skills--item{
+  display: inline-flex;
+  padding: 4px 11px;
+  background: #f0f0f0;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: normal;
+  font-style: 10px;
+  color: #c1c1c1;
+  margin: 0 5px;
+  /* transition: .5s; */
+}
+.card__footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.cbtn{
+  background: #f0f0f0;
+  border-radius: 42px;
+  display: inline-flex;
+  margin: 0 5px;
+  padding: 15px 35px;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  color: #bababa;
+  text-decoration: none !important;
+  cursor:pointer;
+  /* transition: .5s; */
+}
+.card__soc--link:hover{
+  color: #0047ff; 
+}
+
+.ucard:hover .card__img img{
+  filter: grayscale(0);
+}
+
+.ucard:hover .card__skills--item{
+  background: #e4e9ff;
+  color: #0047ff;
+}
+
+.ucard:hover .cbtn-primary{
+  background: #0047ff;
+  color: #fff;
+}
+.card__cbtn:hover{
+  cursor:pointer;
+}
+.contactcbtn:hover{
+  color: #000;
+}
+
+.skeleton{
+  background-color: #e2e5e7;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0),rgba(255,255,255,0.5),rgba(255,255,255,0));
+  background-size:40px 100%;
+  background-repeat:no-repeat;
+  background-position: left -40px top 0;
+  animation: shine 1s ease infinite;
+}
+
+.card__img.skeleton > * {
+  visibility: hidden;
+}
+
+.card__name.skeleton{
+   text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 4px;
+  
+}
+
+.card__email.skeleton,.card__empid.skeleton{
+  text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    border-radius: 4px;
+    
+  
+}
+
+.card__soc.skeleton{
+  border-radius: 4px;
+}
+
+.card__skills.skeleton{
+  border-radius: 4px;
+}
+
+.card__footer.skeleton{
+  border-radius: 25px;
+}
+
+.card__soc.skeleton > *{
+  visibility: hidden;
+  
+}
+
+.card__skills.skeleton > *{
+  visibility: hidden;
+  
+}
+
+.card__footer.skeleton > *{
+  visibility: hidden;
+
+} 
+
+@keyframes shine{
+  to{
+    background-position: right -40px top 0;
+  }
+}

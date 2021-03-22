@@ -1,0 +1,59 @@
+input[type=date]{
+  width:480px;
+  height:45px;
+  padding: 8px 14px;
+  outline: none;
+  border: 1px solid #DDDDDD;
+  border-radius:5px;
+}
+
+input[type="date"]:in-range::-webkit-datetime-edit-year-field, 
+input[type="date"]:in-range::-webkit-datetime-edit-month-field, 
+input[type="date"]:in-range::-webkit-datetime-edit-day-field, 
+input[type="date"]:in-range::-webkit-datetime-edit-text { 	color: transparent; }
+
+.upload{
+  display: inline-block;
+  margin-left:80px;
+}
+.cancel{
+  display: inline-block;
+  margin-left:170px;
+}
+.cancelbtn{
+  background-color:#fff;
+  color:red;
+  border:1px solid red;
+  border-radius:5px;
+  font-size:18px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:4px;
+  padding-bottom:4px;
+}
+.cancelbtn:focus{
+  outline: none;
+}
+
+#header{
+  margin-top:100px;
+  font-size: 30px;
+}
+
+#uploadform > .tinput{
+  width: 480px !important;
+}
+#uploadform > * {
+  font-size: 18px;
+}
+
+.upload-container{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:100vh;  
+    width: 100%;
+    margin:0;
+    padding:0;
+}

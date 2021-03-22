@@ -1,0 +1,17 @@
+#sendMailForm label{
+  font-size: 20px;
+  font-weight: bold;
+}
+#txtArea{
+  outline:none;
+  resize: none;
+  font-size:18px;
+  padding: 4px 8px;
+}
+.mail-input{
+  width:600px;
+  height: 200px;
+}
+.send-btn{
+  font-size: 18px;
+}

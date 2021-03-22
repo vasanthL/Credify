@@ -1,0 +1,28 @@
+.admin-container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.admin-container > h1{
+  margin-top:50px;
+}
+.admin-container > #searchForm{
+  margin-top:50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.search-input{
+  width:250px;
+  padding: 14px 14px;
+  font-size: 18px;
+  
+  
+}
+.search-btn{
+  padding: 14px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

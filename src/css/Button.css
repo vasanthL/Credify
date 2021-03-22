@@ -1,0 +1,20 @@
+.submit{
+  transition: all 0.5s ease;
+  background-color:#1983FF;
+  color:#fff;
+  border:1px solid #1983FF;
+  border-radius:5px;
+  font-size:14px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:4px;
+  padding-bottom:4px;
+  
+}
+.submit:hover{
+  background-color:#fff;
+  color:#1983FF;
+}
+.submit:focus {
+   outline: none;
+}

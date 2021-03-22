@@ -1,0 +1,36 @@
+.row-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left:30px;
+}
+
+.history-card{
+  width:350px;
+  height:530px;
+  /* background-color: #343A40; */
+  /* color:white; */
+  
+  border: radius 8px;
+}
+
+.view-report{
+  display: flex;
+  flex-direction: row;
+  margin:auto;
+  
+  background-color:#1983FF;
+  color:#fff;
+  border:1px solid #1983FF;
+  border-radius:5px;
+  font-size:14px;
+  padding-left:10px;
+  padding-right:10px;
+  padding-top:4px;
+  padding-bottom:4px;
+}
+.view-report > a {
+  margin-right: 8px;
+  text-decoration: none;
+  color:white;
+}
