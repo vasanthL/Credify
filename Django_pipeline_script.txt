@@ -1,0 +1,71 @@
+pipeline {
+  agent any
+  environment{
+        dockerImage = ''
+        registry = 'kaushikhareesh/credifydjango'
+        registryCredential = 'docker_cred'
+    }
+  stages {
+    stage('SCM') {
+      steps {
+        git branch: 'main', url: 'https://github.com/Kaushik-h/certbackend.git'
+      }
+    }
+    
+    stage('Static Code Analysis') {
+            steps {
+                script {
+                    sh 'find . -name \\*.py | xargs pylint --load-plugins=pylint_django -f parseable | tee pylint.log'
+                    recordIssues(
+                        tool: pyLint(pattern: 'pylint.log'),
+                        failTotalHigh: 10,
+                    )
+                }
+            }
+        }
+        
+    stage('Unit testing') {
+      steps {
+        sh 'pip3 install -r requirements.txt'
+        sh 'python3 manage.py makemigrations'
+        sh 'python3 manage.py migrate'
+        sh 'python3 manage.py jenkins'
+      }
+    }
+    
+    stage('Building Docker image') {
+            steps{
+                script {
+                  dockerImage = docker.build registry
+                }
+            }
+        }
+    stage('Upload Docker Image'){
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()    
+                    }
+                }
+            }
+        }
+    stage('Clean Container') {
+      steps {
+        sh 'docker ps -f name=credifycontainer -q | xargs --no-run-if-empty docker container stop'
+        sh 'docker container ls -a -fname=credifycontainer -q | xargs -r docker container rm'
+      }
+    }
+    stage('Docker Run') {
+      steps{
+        script {
+          sh 'docker image prune -f'
+          dockerImage.run("-p 80:8000 --rm --name credifycontainer")        }
+      }
+    }
+  }
+  post {
+      always {
+        junit 'reports/junit.xml'
+      }
+  } 
+}
