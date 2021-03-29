@@ -1,0 +1,26 @@
+1.Created Database secret
+
+kubectl create secret generic db-secret \
+  --from-literal=username=credifyadmin \
+  --from-literal=password=credifyadmin \
+  --from-literal=database=credify
+
+  Instance Connection Name: sunlit-core-307817:us-central1:credifydb
+  Project ID: 	sunlit-core-307817
+----------------------------------------------------------------------------------------------------
+through service account
+
+Create a service account with SQL Client IAM role 
+
+1. Create service account key 
+
+gcloud iam service-accounts keys create ~/key.json \
+  --iam-account credify-k8-postgres-sa@sunlit-core-307817.iam.gserviceaccount.com
+
+
+2.Create a Kubernetes secret
+
+kubectl create secret generic sa-secret \
+--from-file=service_account.json=/home/kishore_a_175/key.json
+
+Help Command: kubectl create deployment credify-backend --image=gcr.io/sunlit-core-307817/credifydjango --dry-run=client --output=yaml
