@@ -1,0 +1,117 @@
+pipeline {
+  agent any
+  tools {nodejs "node"}
+  environment{
+    dockerImage = ''
+    registry = 'akishore17/reactimage'
+    registryCredential = 'dockerhub_id'
+  }
+  stages {
+    stage('Checkout Github and install all requirements') {
+      steps {
+        git branch: 'main', url: 'https://github.com/techhype/Credify.git'
+        sh 'npm install'
+      }
+    }
+    stage('Unit Testing React') {
+      steps {
+        sh 'npm test'
+      }
+    }
+    
+    stage('SonarQube analysis') {
+        environment {
+            scannerHome = tool 'scanner'
+        }
+        steps {
+            withSonarQubeEnv('SonarQube') {
+                sh '''
+                ${scannerHome}/bin/sonar-scanner \
+                -D sonar.login=admin \
+                -D sonar.password=admin \
+                -D sonar.projectKey=reactjenkinsapp \
+                -D sonar.projectName=credify \
+                -D sonar.projectVersion=0.1.0 \
+                -D sonar.sources=./src \
+                -D sonar.test.inclusions=./src/__tests__/**/*.test.tsx,./src/__tests__/**/*.test.ts \
+                -D sonar.exclusions=**/__tests__/**
+                '''
+            }
+        }
+    }
+    // stage("JMeter Testing"){
+    //     steps{
+    //         sh 'sh /opt/jmeter/bin/jmeter.sh -J jmeter.save.saveservice.output.format=xml -n -t /opt/jmeter-tests/jmetercmd.jmx -l /home/kishore_a_175/result1.jtl'    
+    //         perfReport '/home/kishore_a_175/result1.jtl'    
+    //     }
+    // }
+    
+    // stage("E2E Testing"){
+    //     steps{
+    //         sh 'npm run cypress'
+    //     }
+    // }
+    
+    stage('Building image') {
+        steps{
+            script {
+              dockerImage = docker.build registry
+            }
+        }
+    }
+        
+    stage('Upload Docker Image to GCR'){
+        steps{
+            sh 'docker tag akishore17/reactimage gcr.io/sunlit-core-307817/reactimage'
+            sh 'docker push gcr.io/sunlit-core-307817/reactimage'
+        }
+    }
+
+    stage('Deploy to Kubernetes'){
+        steps{
+            sh 'gcloud container clusters get-credentials credify-cluster \
+                --zone us-west1-a \
+                --project sunlit-core-307817'
+            sh 'kubectl apply -f credify-frontend.yaml'
+        }
+    }
+
+    // stage('Upload Docker Image'){
+    //     steps{
+    //         script {
+    //             docker.withRegistry( '', registryCredential ) {
+    //                 dockerImage.push()    
+    //             }
+    //         }
+    //     }
+    // }
+    
+    // Stopping all previously running Docker containers for cleaner Docker run
+    // stage('stop react container') {
+    //     steps {
+    //         sh 'docker ps -f name=reactContainer -q | xargs --no-run-if-empty docker container stop'
+    //         sh 'docker container ls -a -fname=reactContainer -q | xargs -r docker container rm'
+    //     }
+    // }
+        
+    // // Running Docker container, make sure port 8096 is opened in 
+    // stage('Run Docker Container') {
+    //     steps{
+    //         script {
+    //             sh 'docker image prune -f'
+    //             dockerImage.run("-p 80:3000 --rm --name reactContainer")
+    //         }
+    //     }
+    // }
+    
+  }
+  post {
+      always {
+          echo 'Post Build Process'
+          
+          emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
+              recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+              subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
+      }
+  }
+}
